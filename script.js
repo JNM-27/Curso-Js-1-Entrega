@@ -59,10 +59,8 @@ function añadirLibroAlCarrito() {
 function filtrarPrecio() {
   let precioComparación = prompt("filtrar por libros de menos de: ");
   console.log("Libros de menos de $" + precioComparación);
-  const menosDe2000 = libros.filter(
-    (libros) => libros.precio < precioComparación
-  );
-  console.log(menosDe2000);
+  const menosDeX = libros.filter((libros) => libros.precio < precioComparación);
+  console.log(menosDeX);
 }
 function filtrarAño() {
   let añoComparación = prompt("filtrar por libros de después de: ");
