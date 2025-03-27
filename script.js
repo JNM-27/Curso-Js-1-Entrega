@@ -29,7 +29,7 @@ const librosCarrito = [];
 
 function añadirLibroAlCarrito() {
   let libroCarrito = prompt(
-    "ingrese el libro que quiera añadir al carrito: \n 1: El Conde de Montecristo \n 2: Lord of the Flies \n 3: Don Quijote de la Mancha \n 4: El Señor de los Anillos: La Comunidad del Anillo \n 5: The Shining \n Ingrese salir para finalizar el ingreso"
+    "ingrese el libro que quiera añadir al carrito: \n 1: El Conde de Montecristo \n 2: Lord of the Flies \n 3: Don Quijote de la Mancha \n 4: El Señor de los Anillos: La Comunidad del Anillo \n 5: The Shining \n 0: Finalizar Programa "
   );
   while (libroCarrito != "salir") {
     switch (libroCarrito) {
@@ -56,26 +56,34 @@ function añadirLibroAlCarrito() {
   console.log("Carrito:");
   console.log(librosCarrito);
 }
-function filtrarPrecioMenor2000() {
-  console.log("Libros de menos de $2000");
-  const menosDe2000 = libros.filter((libros) => libros.precio < 2000);
+function filtrarPrecio() {
+  let precioComparación = prompt("filtrar por libros de menos de: ");
+  console.log("Libros de menos de $" + precioComparación);
+  const menosDe2000 = libros.filter(
+    (libros) => libros.precio < precioComparación
+  );
   console.log(menosDe2000);
 }
-function filtrar1900enadelante() {
-  console.log("Libros de 1900 en adelante");
-  const De1900enadelante = libros.filter((libros) => libros.año >= 1900);
-  console.log(De1900enadelante);
+function filtrarAño() {
+  let añoComparación = prompt("filtrar por libros de después de: ");
+  console.log("Libros de " + añoComparación, " en adelante");
+  const DeXEnAdelante = libros.filter((libros) => libros.año >= añoComparación);
+  console.log(DeXEnAdelante);
 }
-function calcularPrecio() {
+function calcularPrecioFinal() {
   let precioCalculo = 0;
   for (const libroCarrito of librosCarrito) {
     precioCalculo = precioCalculo + libroCarrito.precio;
   }
   return precioCalculo;
 }
+function CalcularRestanteParaDescuento(a, b) {
+  let diferencia = a - b;
+  return diferencia;
+}
 
 let n = prompt(
-  "Ingrese el número de la función que desea realizar: \n 1: Añadir libros al carrito \n 2: Libros de menos de $2000 \n 3: Libros de 1900 en adelante \n 4: Finalizar compra \n 0: finalizar programa"
+  "Ingrese el número de la función que desea realizar: \n 1: Añadir libros al carrito \n 2: Filtrar libros por precio \n 3: Filtrar libros por año \n 4: Calcular restante para descuento del %20 \n 5: Finalizar compra \n 0: Finalizar programa"
 );
 while (n != 0) {
   switch (n) {
@@ -83,13 +91,28 @@ while (n != 0) {
       añadirLibroAlCarrito();
       break;
     case "2":
-      filtrarPrecioMenor2000();
+      filtrarPrecio();
       break;
     case "3":
-      filtrar1900enadelante();
+      filtrarAño();
       break;
     case "4":
-      let precioFinal = calcularPrecio();
+      let diferenciadeprecio = CalcularRestanteParaDescuento(
+        5000,
+        calcularPrecioFinal()
+      );
+      if (diferenciadeprecio > 0) {
+        console.log(
+          "Restan $" + diferenciadeprecio,
+          "para el descuento del %20"
+        );
+      } else {
+        console.log("Alcanza el monto mínimo para el descuento");
+      }
+
+      break;
+    case "5":
+      let precioFinal = calcularPrecioFinal();
       if (precioFinal >= 5000) {
         precioFinal = precioFinal * 0.8;
         console.log("Descuento del %20 \n Precio Final:" + precioFinal);
@@ -101,6 +124,6 @@ while (n != 0) {
       console.log("Valor No Valido");
   }
   n = prompt(
-    "Ingrese el número de la función que desea realizar: \n 1: Añadir libros al carrito \n 2: Libros de menos de $2000 \n 3: Libros de 1900 en adelante \n 4: Finalizar compra \n 0: finalizar programa"
+    "Ingrese el número de la función que desea realizar: \n 1: Añadir libros al carrito \n 2: Filtrar libros por precio \n 3: Filtrar libros por año \n 4: Calcular restante para descuento del %20 \n 5: Finalizar compra \n 0: Finalizar programa"
   );
 }
